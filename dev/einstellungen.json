@@ -1,0 +1,6 @@
+{
+  "max_gleichzeitig": 2,
+  "timeout_minuten": 45,
+  "max_laeufe_pro_tag": 20,
+  "toast_an": true
+}

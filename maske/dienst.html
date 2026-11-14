@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>dienst</title>
+  <link rel="stylesheet" href="ansicht.css">
+</head>
+<body class="dienst_seite">
+  <main id="dienst_seite_box" class="glas dienst_seite_box">
+    <p class="marke">dienst</p>
+    <p id="dienst_titel" class="dienst_titel">laden…</p>
+    <div id="dienst_inhalt" class="dienst_inhalt"></div>
+    <div id="dienst_pills" class="pills"></div>
+    <p id="dienst_fehler" class="leer_hinweis"></p>
+  </main>
+  <script>
+    //eigene seite fuer einen dienst, nur textContent
+    function zeile(label, wert) {
+      var p = document.createElement("div");
+      var span;
+      var stark;
+      p.className = "meta_zeile";
+      span = document.createElement("span");
+      span.textContent = label;
+      stark = document.createElement("strong");
+      stark.textContent = wert || "—";
+      p.appendChild(span);
+      p.appendChild(stark);
+      return p;
+    }
+
+    function block(titel, text) {
+      var wrap = document.createElement("section");
+      var h;
+      var body;
+      wrap.className = "dienst_abschnitt";
+      h = document.createElement("h2");
+      h.textContent = titel;
+      body = document.createElement("p");
+      body.className = "dienst_text";
+      body.textContent = text || "—";
+      wrap.appendChild(h);
+      wrap.appendChild(body);
+      return wrap;
+    }
+
+    function zeichne(daten) {
+      var box = document.querySelector("#dienst_inhalt");
+      var pills = document.querySelector("#dienst_pills");
+      var i;
+      var knopf;
+      document.querySelector("#dienst_titel").textContent = daten.name || daten.id || "dienst";
+      document.title = daten.name || "dienst";
+      box.textContent = "";
+      box.appendChild(zeile("status", daten.status));
+      box.appendChild(zeile("seit", daten.seit || "—"));
+      box.appendChild(zeile("ort", daten.ort || "—"));
+      box.appendChild(zeile("projekt", daten.projekt || "—"));
+      box.appendChild(block("letzte meldung", daten.letzte_meldung));
+      if (daten.verlauf && daten.verlauf.length) {
+        for (i = 0; i < daten.verlauf.length; i++) {
+          box.appendChild(block("verlauf", daten.verlauf[i].text));
+        }
+      }
+      box.appendChild(block("was als naechstes", daten.naechstes));
+      pills.textContent = "";
+      ["anhalten", "weiter"].forEach(function (aktion) {
+        knopf = document.createElement("button");
+        knopf.type = "button";
+        knopf.className = "pill";
+        knopf.textContent = aktion;
+        knopf.addEventListener("click", function () {
+          fetch("/bruecke/eingriff", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({id: daten.id, aktion: aktion})
+          }).then(function () {
+            laden();
+          }).catch(function () {
+            document.querySelector("#dienst_fehler").textContent = "eingriff fehlgeschlagen";
+          });
+        });
+        pills.appendChild(knopf);
+      });
+    }
+
+    function laden() {
+      var id = "";
+      try {
+        id = new URLSearchParams(window.location.search).get("id") || "";
+      } catch (fehler) {
+        id = "";
+      }
+      if (!id) {
+        document.querySelector("#dienst_fehler").textContent = "id fehlt";
+        return;
+      }
+      fetch("/dev/dienst?id=" + encodeURIComponent(id))
+        .then(function (antwort) {
+          return antwort.json().then(function (body) {
+            return {ok: antwort.ok, body: body};
+          });
+        })
+        .then(function (antwort) {
+          if (!antwort.ok) {
+            document.querySelector("#dienst_fehler").textContent = (antwort.body && antwort.body.fehler) || "dienst ungueltig";
+            return;
+          }
+          zeichne(antwort.body);
+        })
+        .catch(function () {
+          document.querySelector("#dienst_fehler").textContent = "nicht erreichbar";
+        });
+    }
+
+    laden();
+  </script>
+</body>
+</html>

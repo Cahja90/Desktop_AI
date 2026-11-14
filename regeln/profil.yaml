@@ -1,0 +1,7 @@
+anzeige: beispiel
+bio: "Beispielprofil. Kein Klarname, kein Ort."
+website: https://example.com
+kein_klarname: true
+kein_ort: true
+kein_linkedin: true
+kontakt_datei: profil/kontakt.txt

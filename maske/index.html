@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>bruecke</title>
+  <link rel="stylesheet" href="ansicht.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="liste" class="glas">
+      <div class="kopf">
+        <div class="kopf_zeile">
+          <p class="marke">bruecke</p>
+          <button type="button" id="dreh_knopf" class="dreh_knopf" title="drehung stoppen" aria-pressed="false">&#x23F8;</button>
+          <div id="zaehler" class="zaehler"></div>
+        </div>
+        <div id="tabs" role="tablist" aria-label="ansicht">
+          <button type="button" class="tab gesetzt" data-tab="projekte" role="tab" aria-selected="true">projekte</button>
+          <button type="button" class="tab" data-tab="dienste" role="tab" aria-selected="false">dienste</button>
+          <button type="button" class="tab" data-tab="alle" role="tab" aria-selected="false">alle</button>
+        </div>
+      </div>
+      <label class="nur_lese" for="suche">suche</label>
+      <input id="suche" type="search" placeholder="suchen" autocomplete="off">
+      <p id="hover_info">hover zeigt pfad</p>
+      <div id="karten_liste"></div>
+    </aside>
+
+    <main id="mitte">
+      <canvas id="buehne"></canvas>
+      <div id="labels"></div>
+      <p id="hinweis_maus">ziehen · klick waehlt</p>
+    </main>
+
+    <aside id="agent" class="glas">
+      <p class="marke">dev</p>
+      <p id="agent_name">keins gewaehlt</p>
+      <div id="meta_zeilen" class="meta"></div>
+      <div id="bericht_box" class="bericht_box">
+        <details class="bericht_block" open>
+          <summary>stand jetzt</summary>
+          <div id="bericht_stand" class="bericht_body">kein stand</div>
+        </details>
+        <details class="bericht_block" open>
+          <summary>zuletzt gemacht</summary>
+          <div id="bericht_gemacht" class="bericht_body">—</div>
+        </details>
+        <details class="bericht_block" open>
+          <summary>letzte aenderungen</summary>
+          <div id="bericht_aenderungen" class="bericht_body">—</div>
+        </details>
+        <details class="bericht_block" open>
+          <summary>was muss gemacht werden</summary>
+          <div id="bericht_todos" class="bericht_body">—</div>
+        </details>
+        <details class="bericht_block" open>
+          <summary>naechster schritt</summary>
+          <div id="bericht_naechstes" class="bericht_body">—</div>
+        </details>
+      </div>
+      <section>
+        <h2>protokoll</h2>
+        <div id="protokoll_live" class="md">kein protokoll</div>
+      </section>
+      <section>
+        <h2>wege</h2>
+        <div id="vorschlag_liste"></div>
+      </section>
+      <button type="button" id="knopf_freigeben">freigeben</button>
+      <p id="wahl_stand"></p>
+      <section>
+        <h2>live-log</h2>
+        <pre id="log_live">kein log</pre>
+      </section>
+    </aside>
+  </div>
+  <div id="dienst_overlay" class="dienst_overlay" hidden>
+    <div id="dienst_fenster" class="dienst_fenster glas" role="dialog" aria-modal="true" aria-labelledby="dienst_titel">
+      <div class="dienst_kopf">
+        <p id="dienst_titel" class="dienst_titel">dienst</p>
+        <div class="dienst_kopf_rechts">
+          <a id="dienst_tab_link" class="pill" href="#" target="_blank" rel="noreferrer">in neuem tab</a>
+          <button type="button" id="dienst_schliessen" class="dienst_x" aria-label="schliessen">x</button>
+        </div>
+      </div>
+      <div id="dienst_inhalt" class="dienst_inhalt"></div>
+      <div id="dienst_pills" class="pills"></div>
+    </div>
+  </div>
+  <script src="ansicht.js"></script>
+</body>
+</html>

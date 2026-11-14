@@ -1,0 +1,17 @@
+{
+  "hinweis": "beispielstand. die echten eintraege liegen lokal neben dieser datei.",
+  "profil": {
+    "name": "profil",
+    "wahl": "zu",
+    "offen": [],
+    "protokoll": "beispiel"
+  },
+  "projekte": [
+    {
+      "name": "beispiel-seite",
+      "wahl": "zu",
+      "offen": [],
+      "protokoll": "beispielprojekt"
+    }
+  ]
+}

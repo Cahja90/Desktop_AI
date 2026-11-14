@@ -1,0 +1,11 @@
+konto: beispiel
+projekte:
+  - name: beispiel-pipeline
+    saas: false
+    demo: ""
+  - name: beispiel-seite
+    saas: true
+    demo: https://example.com
+  - name: beispiel-anleitung
+    saas: false
+    demo: ""

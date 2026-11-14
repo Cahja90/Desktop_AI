@@ -1,0 +1,15 @@
+{
+  "tag": "",
+  "laeufe_heute": 0,
+  "projekte": {
+    "beispiel-seite": {
+      "name": "beispiel-seite",
+      "pfad": "beispiel-seite",
+      "zustand": "leer",
+      "modus": "",
+      "letzter_auftrag": "",
+      "log_pfad": "",
+      "protokoll_pfad": ""
+    }
+  }
+}

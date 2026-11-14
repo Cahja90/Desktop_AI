@@ -1,0 +1,13 @@
+{
+  "projekte": [
+    {
+      "id": "hub",
+      "name": "hub",
+      "pfad": ".",
+      "aktiv": true,
+      "art": "hub",
+      "eingefuegt": "2026-01-01T00:00:00",
+      "lane_ausschluss": ["beispiel-seite"]
+    }
+  ]
+}

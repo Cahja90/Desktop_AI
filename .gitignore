@@ -1,0 +1,60 @@
+# lokale echtdaten, beispiele bleiben getrackt
+*.lokal.*
+
+# secrets
+profil/kontakt.txt
+.env
+**/.env
+**/.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.desk_token
+.tunnel_token
+**/.desk_token
+**/.tunnel_token
+**/.certs/
+**/chats.json
+
+# python / node / caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+node_modules/
+
+# logs and loop local state
+*.log
+**/.dev/laeufe/
+.loop/
+**/.loop/
+protokolle/zentrale/
+
+# large media
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.mp3
+*.wav
+*.iso
+*.zip
+*.7z
+*.rar
+maske/vorschau*.png
+
+# eigene projektordner bleiben lokal in .git/info/exclude
+
+# editor / backups
+.cursor/
+sicherung/
+
+profil/
+.vscode/
+protokolle/
