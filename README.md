@@ -1,6 +1,8 @@
-﻿# Desktop_AI
+# Desktop_AI
 
 Lokale Zentrale: Projekte, Agenten und Loops im Ueberblick.
+
+![Zentrale](docs/zentrale.png)
 
 ## So funktioniert es
 
